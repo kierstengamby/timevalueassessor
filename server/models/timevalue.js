@@ -9,11 +9,11 @@ const TimeValue = db.define("timevalue", {
     allowNull: false,
     },
     hourlyWage: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     neutralValue: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
 });

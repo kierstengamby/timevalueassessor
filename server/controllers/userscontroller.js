@@ -5,13 +5,14 @@ const jwt = require('jsonwebtoken');
 const { UniqueConstraintError } = require('sequelize/lib/errors');
 
 router.post('/register', async (req, res) => {
-    const { firstName, lastName, email, password } = req.body.user;
+    const { firstName, lastName, email, password, isAdmin } = req.body.user;
     try {
         await models.UsersModel.create({
             firstName: firstName,
             lastName: lastName,
             email: email,
-            password: bcrypt.hashSync(password, 10)
+            password: bcrypt.hashSync(password, 10),
+            isAdmin: isAdmin
         })
         .then(
             user => {
@@ -35,4 +36,66 @@ router.post('/register', async (req, res) => {
         };
     };
 });
+
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body.user;
+    try {
+        let loginUser = await models.UsersModel.findOne({
+            where: {
+                email: email,
+            },
+        });
+        if (loginUser) {
+            let passwordComparison = await bcrypt.compare(password, loginUser.password);
+            if (passwordComparison) {
+                let token = jwt.sign({ id: loginUser.id }, process.env.JWT_SECRET, {expiresIn: 60*60*24});
+                
+                res.status(200).json({
+                    user: loginUser,
+                    message: 'User successfully logged in',
+                    sessionToken: `Bearer ${token}`
+                });
+            } else {
+                res.status(401).json({
+                    message: 'Incorrect email or password'
+                });
+            }
+        } else {
+            res.status(401).json({
+                message: 'Incorrect email or password'
+            });
+        }
+    } catch(err) {
+        res.status(500).json({
+            message: 'Failed to log user in'
+        })
+    }
+});
+
+router.get('/userinfo', async (req, res) => {
+    try {
+        await models.UsersModel.findAll({
+            include: [
+                {
+                    model: models.TimeValueModel,
+                    model: models.TasksModel,
+                    model: models.ValuesModel
+                }
+            ]
+        })
+        .then(
+            users => {
+                res.status(200).json({
+                    users: users
+                });
+            }
+        )
+    } catch(err) {
+        res.status(500).json({
+            error: `Failed to retriever user info: ${err}`
+        });
+    };
+});
+
+module.exports = router;
 

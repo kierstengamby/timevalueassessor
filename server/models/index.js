@@ -9,8 +9,9 @@ UsersModel.hasMany(TimeValueModel);
 UsersModel.hasMany(TasksModel);
 UsersModel.hasMany(ValuesModel);
 
-ValuesModel.belongsToMany(UsersModel, ) 
-// will this create a whole new table?, how to associate it with multiple other tables' values?
+// ValuesModel.belongsTo(UsersModel);
+// ValuesModel.belongsTo(TimeValueModel);
+// ValuesModel.belongsTo(TasksModel);
 
 module.exports = {
     dbConnection: db,
