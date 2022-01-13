@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { TimeoutError } = require('sequelize/lib/errors');
 const { models } = require('../models');
+const validateJWT = require('../middleware/validate-session')
 
 router.post('/time', async(req, res) => {
     const { hourlyWage, neutralValue } = req.body.time;
@@ -26,13 +27,15 @@ router.post('/time', async(req, res) => {
     };
 });
 
-router.put('/time', async (req, res) => {
+router.put('/:id', validateJWT, async (req, res) => {
     const { hourlyWage, neutralValue } = req.body.time;
-    const timeId = req.body.time.id;
+    const timeId = req.params.id;
+    const userId = req.user.id;
 
     const query = {
         where: {
-            id: timeId
+            id: timeId,
+            userId: userId
         }
     };
 
@@ -46,24 +49,21 @@ router.put('/time', async (req, res) => {
     }
 });
 
-router.get('/time', async(req, res) => {   
-    const { userId } = req.user.id;
-
-    const getAll = {
-        where: {
-            id: userId
-        }
-    };
-
+router.get('/', validateJWT, async(req, res) => {
+    const userId = req.user.id;
     try {
-        const allTimePosts = await models.TimeValueModel.findAll({ getAll })
-        res.status(200).json(allTimePosts)
+        const results = await models.TimeValueModel.findAll({
+            where: {
+                userId: userId
+            }
+        });
+        res.status(200).json(results)
     } catch(err) {
         res.status(500).json({
             error: `${err}`
         })
     }
-});
+})
 
 router.delete('/time', async(req, res) =>{
     try {
