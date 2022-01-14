@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const { TimeoutError } = require('sequelize/lib/errors');
 const { models } = require('../models');
-const validateJWT = require('../middleware/validate-session')
+const validateJWT = require('../middleware/validate-session');
 
-router.post('/time', async(req, res) => {
+router.post('/time', validateJWT, async(req, res) => {
     const { hourlyWage, neutralValue } = req.body.time;
     
     try {
@@ -65,11 +65,13 @@ router.get('/', validateJWT, async(req, res) => {
     }
 })
 
-router.delete('/time', async(req, res) =>{
+router.delete('/:id', validateJWT, async(req, res) =>{
+    const userId = req.user.id;
     try {
         await models.TimeValueModel.destroy({ 
             where: {
-                id: req.body.id 
+                id: req.params.id, 
+                userId: userId
             }
         }).then((result) => {
             if(result) {

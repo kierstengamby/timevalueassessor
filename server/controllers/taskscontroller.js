@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { models } = require('../models');
+const validateJWT = require('../middleware/validate-session');
 
-router.post('/tasks', async(req, res) => {
+router.post('/tasks', validateJWT, async(req, res) => {
     const { cleaning, laundry, mealPrep, petCare, shopping, carCare, taxes } = req.body.tasks;
 
     try{
@@ -30,13 +31,15 @@ router.post('/tasks', async(req, res) => {
     };
 });
 
-router.put('/tasks', async(req, res) => {
+router.put('/:id', validateJWT, async(req, res) => {
     const { cleaning, laundry, mealPrep, petCare, shopping, carCare, taxes } = req.body.tasks;
-    const tasksId = req.body.tasks.id;
+    const tasksId = req.params.id;
+    const userId = req.user.id;
 
     const query = {
         where: {
-            id: tasksId
+            id: tasksId,
+            userId: userId
         }
     };
 
@@ -50,18 +53,15 @@ router.put('/tasks', async(req, res) => {
     }
 });
 
-router.get('/tasks', async(req, res) => {   
-    const { userId } = req.user.id;
-
-    const getAll = {
-        where: {
-            id: userId
-        }
-    };
-
-    try {
-        const allTasksPosts = await models.TasksModel.findAll({ getAll })
-        res.status(200).json(allTasksPosts)
+router.get('/', validateJWT, async(req, res) => {   
+    const userId = req.user.id;
+    try{
+        const results = await models.TasksModel.findAll({
+            where: {
+                userId: userId
+            }
+        });
+        res.status(200).json(results)
     } catch(err) {
         res.status(500).json({
             error: `${err}`
@@ -69,11 +69,13 @@ router.get('/tasks', async(req, res) => {
     }
 });
 
-router.delete('/tasks', async(req, res) =>{
+router.delete('/:id', validateJWT, async(req, res) =>{
+    const userId = req.user.id;
     try {
         await models.TasksModel.destroy({ 
             where: {
-                id: req.body.id 
+                id: req.params.id,
+                userId: userId 
             }
         }).then((result) => {
             if(result) {
