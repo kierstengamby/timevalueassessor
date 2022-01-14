@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { models } = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const validateJWT = require('../middleware/validate-session');
 const { UniqueConstraintError } = require('sequelize/lib/errors');
 
 router.post('/register', async (req, res) => {
@@ -72,30 +73,60 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/userinfo', async (req, res) => {
-    try {
-        await models.UsersModel.findAll({
-            include: [
-                {
-                    model: models.TimeValueModel,
-                    model: models.TasksModel,
-                    model: models.ValuesModel
+router.get('/allinfo', validateJWT, async (req, res) => {
+    const id = req.user.id;
+    const isAdmin = req.user.isAdmin;
+
+    if(isAdmin == true) {
+        try {
+            await models.UsersModel.findAll({
+                include: [
+                    {
+                        model: models.TimeValueModel,
+                        model: models.TasksModel
+                        // model: models.ValuesModel
+                    }
+                ]
+            })
+            .then(
+                users => {
+                    res.status(200).json({
+                        users: users
+                    });
                 }
-            ]
-        })
-        .then(
-            users => {
-                res.status(200).json({
-                    users: users
-                });
-            }
-        )
-    } catch(err) {
-        res.status(500).json({
-            error: `Failed to retriever user info: ${err}`
-        });
-    };
+            )
+            } catch(err) {
+            res.status(500).json({
+                error: `Failed to retriever user info: ${err}`
+            });
+        };
+    } else {
+        try {
+            await models.UsersModel.findAll({
+                where: {
+                    id: id
+                },
+                include: [
+                    {
+                        model: models.TimeValueModel,
+                        model: models.TasksModel
+                        // model: models.ValuesModel
+                    }
+                ]
+            })
+            .then(
+                users => {
+                    res.status(200).json({
+                        users: users
+                    });
+                }
+            )
+        } catch(err) {
+            res.status(500).json({
+                error: `Failed to retriever user info: ${err}`
+            });
+        };
+    }
 });
 
 module.exports = router;
-
