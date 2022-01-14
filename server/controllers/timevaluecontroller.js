@@ -44,7 +44,7 @@ router.put('/:id', validateJWT, async (req, res) => {
         where: {
             id: timeId
         }
-    }
+    };
 
     const updateTimeValueModel = { hourlyWage, neutralValue };
 
