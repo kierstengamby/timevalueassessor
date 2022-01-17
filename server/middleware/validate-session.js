@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const { models } = require('../models');
 
 const validateJWT = async (req, res, next) => {
-    if(req.method == 'OPTIONS') {
+    console.log(`${req.method}`)
+    if(req.method == 'GET') {
         next();
     } else if (req.headers.authorization && req.headers.authorization.includes('Bearer')) {
         const { authorization } = req.headers;
