@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import SiteBar from './home/Navbar';
 import Auth from './components/Auth/Auth';
+import Splash from './home/Splash';
 import { 
   BrowserRouter as Router, 
   Route, 
   Switch
 } from 'react-router-dom';
+
 
 
 class App extends Component {
@@ -35,12 +37,32 @@ class App extends Component {
     localStorage.clear();
 }
 
+  protectedViews = () => {
+    if (this.state.sessionToken === localStorage.getItem('token')) {
+      return(
+        <Switch>
+          <Route path='/' exact>
+            <Splash sessionToken={this.state.sessionToken} />
+          </Route>
+        </Switch>
+      )
+    } else {
+      return (
+        <Switch>
+          <Route path='/' exact>
+            <Auth setToken={this.setSessionState} />
+          </Route>
+        </Switch>
+      )
+    }
+  }
+
   render () {
     return (
       <Router>
         <div>
           <SiteBar clickLogout={this.logout} />
-          <Auth setToken={this.setSessionState} />
+          {this.protectedViews()}
         </div>
       </Router>
     )
