@@ -3,7 +3,7 @@ const { models } = require('../models');
 
 const validateJWT = async (req, res, next) => {
     console.log(`${req.method}`)
-    if(req.method == 'GET') {
+    if(req.method == 'OPTIONS') {
         next();
     } else if (req.headers.authorization && req.headers.authorization.includes('Bearer')) {
         const { authorization } = req.headers;

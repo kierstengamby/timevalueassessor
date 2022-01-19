@@ -19,22 +19,22 @@ class TimeCreate extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        fetch("http://localhost:9000/timevalue/time", {
+        fetch(`http://localhost:9000/timevalue/time`, {
             method: 'POST',
-            body: JSON.stringify({ log: this.state }), //! Should variable log change names?
+            body: JSON.stringify({ time: this.state }),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
             })
         }).then((res) => res.json())
-        .then((logData) => {
+        .then((timeData) => {
             this.props.updateTimeArray(); 
             this.setState({
                 id: '',
                 hourlyWage: '',
                 neutralValue: ''
             })
-        })
+        }); console.log(this.setState);
     }
 
     render() {
