@@ -13,9 +13,9 @@ class TimeEdit extends React.Component {
 
     componentWillMount() {
         this.setState({
-            id: this.props.time.id,
-            hourlyWage: this.props.time.hourlyWage,
-            neutralValue: this.props.time.neutralValue
+            id: this.props.timevalue.id,
+            hourlyWage: this.props.timevalue.hourlyWage,
+            neutralValue: this.props.timevalue.neutralValue
         })
     }
 
@@ -39,7 +39,7 @@ class TimeEdit extends React.Component {
                         <Form onSubmit={this.handleSubmit} >
                             <FormGroup>
                                 <Label for="hourlyWage">Hourly Wage</Label>
-                                <Input id="hourlyWage" type="text" name="result" value={this.state.hourlyWage} placeholder="Enter hourly wage" onChange={this.handleChange} />
+                                <Input id="hourlyWage" type="text" name="hourlyWage" value={this.state.hourlyWage} placeholder="Enter hourly wage" onChange={this.handleChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="neutralValue">Neutral Value</Label>

@@ -42,10 +42,12 @@ class TimeIndex extends Component {
         }).then((res) => this.fetchTime())
     }
 
-    timeUpdate = (event, time) => {
-        fetch(`http://localhost:9000/timevalue/${event.target.id}`, {
+    timeUpdate = (event, timeObj) => {
+        const { id, hourlyWage, neutralValue } = timeObj
+        // console.log(id, hourlyWage, neutralValue, timeObj);
+        fetch(`http://localhost:9000/timevalue/${id}`, {
             method: 'PUT',
-            body: JSON.stringify({ timevalue: { id: event.target.id } }),
+            body: JSON.stringify({ time: { hourlyWage, neutralValue } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': this.props.token
@@ -75,7 +77,7 @@ class TimeIndex extends Component {
                         {timevalue}
                     </Col>
                     <Col md="12">
-                        { this.state.updatePressed ? <TimeEdit t={this.state.updatePressed} update={this.timeUpdate} time={this.state.timeToUpdate} /> : <div></div> }
+                        { this.state.updatePressed ? <TimeEdit t={this.state.updatePressed} update={this.timeUpdate} timevalue={this.state.timeToUpdate} /> : <div></div> }
                     </Col>
                 </Row>
             </Container>
