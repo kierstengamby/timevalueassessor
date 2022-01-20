@@ -1,19 +1,27 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import React from 'react';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
-class TasksCreate extends Component {
+class TasksEdit extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            // id: '',
-            cleaning: '',
-            laundry: '',
-            mealPrep: '',
-            petCare: '',
-            shopping: '', 
-            carCare: '',
-            taxes: ''
-        };
+            this.state = {
+                id: '',
+                cleaning: '',
+                laundry: '',
+                mealPrep: '',
+                petCare: '',
+                shopping: '', 
+                carCare: '',
+                taxes: ''
+            };
+        }
+
+    componentWillMount() {
+        this.setState({
+            id: this.props.tasks.id,
+            hourlyWage: this.props.tasks.hourlyWage,
+            neutralValue: this.props.tasks.neutralValue
+        })
     }
 
     handleChange = (event) => {
@@ -24,36 +32,16 @@ class TasksCreate extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        fetch(`http://localhost:9000/tasks/task`, {
-            method: 'POST',
-            body: JSON.stringify({ task: this.state }),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': this.props.token
-            })
-        }).then((res) => res.json())
-        .then((taskData) => {
-            this.props.updateTasksArray(); 
-            this.setState({
-                id: '',
-                cleaning: '',
-                laundry: '',
-                mealPrep: '',
-                petCare: '',
-                shopping: '', 
-                carCare: '',
-                taxes: ''
-            })
-            console.log(taskData);
-        }); console.log(this.setState);
+        this.props.update(event, this.state)
     }
 
     render() {
         return (
             <div>
-                <h3>Log Tasks</h3>
-                <hr />
-                <Form onSubmit={this.handleSubmit} > 
+                <Modal isOpen={true} >
+                    <ModalHeader >Log Tasks</ModalHeader>
+                    <ModalBody>
+                    <Form onSubmit={this.handleSubmit} > 
                     <FormGroup>
                         <Label for="cleaning">Cleaning</Label>
                         <Input id="cleaning" type="text" name="cleaning" value={this.state.cleaning} placeholder="Average cleaning time" onChange={this.handleChange} />
@@ -83,10 +71,12 @@ class TasksCreate extends Component {
                         <Input id="taxes" type="text" name="taxes" value={this.state.taxes} placeholder="Average taxes time" onChange={this.handleChange} />
                     </FormGroup>
                     <Button type="submit" color="primary"> Submit </Button>
-                </Form>
+                        </Form>
+                    </ModalBody>
+                </Modal>
             </div>
         )
     }
 }
 
-export default TasksCreate;
+export default TasksEdit;

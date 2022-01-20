@@ -2,8 +2,8 @@ const router = require('express').Router();
 const { models } = require('../models');
 const validateJWT = require('../middleware/validate-session');
 
-router.post('/tasks', validateJWT, async(req, res) => {
-    const { cleaning, laundry, mealPrep, petCare, shopping, carCare, taxes } = req.body.tasks;
+router.post('/task', validateJWT, async(req, res) => {
+    const { cleaning, laundry, mealPrep, petCare, shopping, carCare, taxes } = req.body.task;
 
     try{
         await models.TasksModel.create({
@@ -17,9 +17,9 @@ router.post('/tasks', validateJWT, async(req, res) => {
             userId: req.user.id
         })
         .then(
-            tasks => {
+            task => {
                 res.status(201).json({
-                    tasks: tasks,
+                    task: task,
                     message: 'Tasks created'
                 });
             }
@@ -32,7 +32,7 @@ router.post('/tasks', validateJWT, async(req, res) => {
 });
 
 router.put('/:id', validateJWT, async(req, res) => {
-    const { cleaning, laundry, mealPrep, petCare, shopping, carCare, taxes } = req.body.tasks;
+    const { cleaning, laundry, mealPrep, petCare, shopping, carCare, taxes } = req.body.task;
     const tasksId = req.params.id;
     const userId = req.user.id;
     const isAdmin = req.user.isAdmin;

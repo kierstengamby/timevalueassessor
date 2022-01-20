@@ -9,32 +9,32 @@ const Tasks = db.define("tasks", {
         allowNull: false,
     },
     cleaning: {
-        type: DataTypes.TIME,
-        allowNull: true,
+        type: DataTypes.INTEGER
+        // allowNull: true,
     },
     laundry:{
-        type: DataTypes.TIME,
-        allowNull: true,
+        type: DataTypes.INTEGER
+        // allowNull: true,
     },
     mealPrep:{
-        type: DataTypes.TIME,
-        allowNull: true,
+        type: DataTypes.INTEGER
+        // allowNull: true,
     },
     petCare:{
-        type: DataTypes.TIME,
-        allowNull: true,
+        type: DataTypes.INTEGER
+        // allowNull: true,
     },
     shopping:{
-        type: DataTypes.TIME,
-        allowNull: true,
+        type: DataTypes.INTEGER
+        // allowNull: true,
     }, 
     carCare:{
-        type: DataTypes.TIME,
-        allowNull: true,
+        type: DataTypes.INTEGER
+        // allowNull: true,
     },
     taxes:{
-        type: DataTypes.TIME,
-        allowNull: true,
+        type: DataTypes.INTEGER
+        // allowNull: true,
     },
 });
 
