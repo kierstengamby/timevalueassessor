@@ -6,13 +6,13 @@ class TasksCreate extends Component {
         super(props)
         this.state = {
             // id: '',
-            cleaning: '',
-            laundry: '',
-            mealPrep: '',
-            petCare: '',
-            shopping: '', 
-            carCare: '',
-            taxes: ''
+            cleaning: 0,
+            laundry: 0,
+            mealPrep: 0,
+            petCare: 0,
+            shopping: 0, 
+            carCare: 0,
+            taxes: 0
         };
     }
 
@@ -36,13 +36,13 @@ class TasksCreate extends Component {
             this.props.updateTasksArray(); 
             this.setState({
                 id: '',
-                cleaning: '',
-                laundry: '',
-                mealPrep: '',
-                petCare: '',
-                shopping: '', 
-                carCare: '',
-                taxes: ''
+                cleaning: 0,
+                laundry: 0,
+                mealPrep: 0,
+                petCare: 0,
+                shopping: 0, 
+                carCare: 0,
+                taxes: 0
             })
             console.log(taskData);
         }); console.log(this.setState);

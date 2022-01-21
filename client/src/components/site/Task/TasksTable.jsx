@@ -9,7 +9,8 @@ const TasksTable = (props) => {
             <Table striped>
                 <thead>
                     <tr>
-                        <th>#</th>
+                        {/* <th>#</th> */}
+                        <th></th>
                         <th>Cleaning</th>
                         <th>Laundry</th>
                         <th>Meal Prep</th>
@@ -25,7 +26,8 @@ const TasksTable = (props) => {
                     props.tasks.map((task, id) => {
                         return (
                             <tr key={id}>
-                                <th scope="row">{task.id}</th>
+                                {/* <th scope="row">{task.id}</th> */}
+                                <th></th>
                                 <td>{task.cleaning}</td>
                                 <td>{task.laundry}</td>
                                 <td>{task.mealPrep}</td>
@@ -42,6 +44,18 @@ const TasksTable = (props) => {
                         })
                     }
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row">Totals</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
             </Table>
         </div>
     );

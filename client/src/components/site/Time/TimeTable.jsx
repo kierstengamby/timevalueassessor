@@ -9,7 +9,7 @@ const TimeTable = (props) => {
             <Table striped>
                 <thead>
                     <tr>
-                        <th>#</th>
+                        {/* <th>#</th> */}
                         <th>Hourly Wage</th>
                         <th>Neutral Value</th>
                         <th></th>
@@ -20,7 +20,7 @@ const TimeTable = (props) => {
                     props.timevalue.map((time, id) => {
                         return (
                             <tr key={id}>
-                                <th scope="row">{time.id}</th>
+                                {/* <th scope="row">{time.id}</th> */}
                                 <td>{time.hourlyWage}</td>
                                 <td>{time.neutralValue}</td>
                                 <td>

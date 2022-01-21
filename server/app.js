@@ -11,7 +11,7 @@ app.use(middleware.CORS);
 app.use(express.json());
 
 app.use('/auth', controllers.userscontroller);
-app.use(middleware.validateSession); 
+app.use(middleware.validateSession); // take this out if you want people to be able to comment on other people's stuff
 app.use('/timevalue', controllers.timevaluecontroller);
 app.use('/tasks', controllers.taskscontroller);
 app.use('/values', controllers.valuescontroller);

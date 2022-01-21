@@ -6,8 +6,8 @@ class TimeCreate extends Component {
         super(props)
         this.state = {
             id: '',
-            hourlyWage: '',
-            neutralValue: ''
+            hourlyWage: 0,
+            neutralValue: 0
         };
     }
 
@@ -31,8 +31,8 @@ class TimeCreate extends Component {
             this.props.updateTimeArray(); 
             this.setState({
                 id: '',
-                hourlyWage: '',
-                neutralValue: ''
+                hourlyWage: 0,
+                neutralValue: 0
             })
         }); console.log(this.setState);
     }
