@@ -43,7 +43,7 @@ class TasksCreate extends Component {
                 shopping: 0, 
                 carCare: 0,
                 taxes: 0
-            })
+            });
             console.log(taskData);
         }); console.log(this.setState);
     }

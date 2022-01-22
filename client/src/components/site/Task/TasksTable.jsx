@@ -2,6 +2,29 @@ import React from 'react';
 import { Table, Button } from 'reactstrap';
 
 const TasksTable = (props) => {
+
+    var totalCleaning = 0
+    var totalLaundry = 0
+    var totalMealPrep = 0
+    var totalPetCare = 0
+    var totalShopping = 0
+    var totalCarCare = 0
+    var totalTaxes = 0
+    
+    const array = props.tasks
+
+    array.map((task, id) => {
+        totalCleaning = totalCleaning + task.cleaning
+        totalLaundry = totalLaundry + task.laundry
+        totalMealPrep = totalMealPrep + task.mealPrep
+        totalPetCare = totalPetCare + task.petCare
+        totalShopping = totalShopping + task.shopping
+        totalCarCare = totalCarCare + task.carCare
+        totalTaxes = totalTaxes + task.taxes
+    })
+    
+    // console.log(totalCleaning, totalLaundry, totalMealPrep, totalPetCare, totalShopping, totalCarCare, totalTaxes);
+
     return (
         <div>
             <h3>Tasks History</h3>
@@ -47,13 +70,13 @@ const TasksTable = (props) => {
                 <tfoot>
                     <tr>
                         <th scope="row">Totals</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{totalCleaning}</td>
+                        <td>{totalLaundry}</td>
+                        <td>{totalMealPrep}</td>
+                        <td>{totalPetCare}</td>
+                        <td>{totalShopping}</td>
+                        <td>{totalCarCare}</td>
+                        <td>{totalTaxes}</td>
                     </tr>
                 </tfoot>
             </Table>

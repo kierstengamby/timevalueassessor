@@ -16,7 +16,7 @@ class TasksEdit extends React.Component {
             };
         }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({
             id: this.props.tasks.id,
             hourlyWage: this.props.tasks.hourlyWage,

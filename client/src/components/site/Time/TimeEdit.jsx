@@ -11,7 +11,7 @@ class TimeEdit extends React.Component {
             };
         }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({
             id: this.props.timevalue.id,
             hourlyWage: this.props.timevalue.hourlyWage,
