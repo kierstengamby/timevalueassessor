@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
 // import TasksCreate from './TasksCreate';
 // import TasksEdit from './TasksEdit';
 // import TasksTable from './TasksTable';
-import { Table, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Container, Row, Col, Table, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 class TasksIndex extends Component {
     constructor(props) {
@@ -52,6 +51,7 @@ class TasksIndex extends Component {
     async componentDidMount() {
         // this.props.fetchMoreTasks(this.props.token)
         const response = await fetch('http://localhost:9000/tasks/', {
+            method:'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')

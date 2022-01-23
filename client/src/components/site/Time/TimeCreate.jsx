@@ -17,25 +17,25 @@ class TimeCreate extends Component {
         })
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        fetch(`http://localhost:9000/timevalue/time`, {
-            method: 'POST',
-            body: JSON.stringify({ time: this.state }),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': this.props.token
-            })
-        }).then((res) => res.json())
-        .then((timeData) => {
-            this.props.updateTimeArray(); 
-            this.setState({
-                id: '',
-                hourlyWage: 0,
-                neutralValue: 0
-            })
-        }); console.log(this.setState);
-    }
+    // handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     fetch(`http://localhost:9000/timevalue/time`, {
+    //         method: 'POST',
+    //         body: JSON.stringify({ time: this.state }),
+    //         headers: new Headers({
+    //             'Content-Type': 'application/json',
+    //             'Authorization': this.props.token
+    //         })
+    //     }).then((res) => res.json())
+    //     .then((timeData) => {
+    //         this.props.updateTimeArray(); 
+    //         this.setState({
+    //             id: '',
+    //             hourlyWage: 0,
+    //             neutralValue: 0
+    //         })
+    //     }); console.log(this.setState);
+    // }
 
     render() {
         return (

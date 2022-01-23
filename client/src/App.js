@@ -14,7 +14,8 @@ class App extends Component {
     this.fetchTasks(localStorage.getItem('token'));
     this.state = {
       sessionToken: localStorage.getItem('token'),
-      tasks:[]
+      tasks:[],
+      time: []
     }
   }
 
@@ -31,6 +32,20 @@ class App extends Component {
         this.setState({ tasks: tasksData })
         return tasksData
     })
+}
+
+fetchTime = (sessionToken) => {
+  fetch("http://localhost:9000/timevalue/", {
+      method: 'GET',
+      headers: new Headers({
+          'Content-Type': 'application/json',
+          'Authorization': sessionToken
+      })
+  }).then((res) => res.json())
+  .then((timeData) => {
+      this.setState({ time: timeData })
+      return timeData
+  })
 }
 
 
@@ -64,7 +79,7 @@ class App extends Component {
       return(
         <Switch>
           <Route path='/' exact>
-            <Splash tasks={this.state.tasks} sessionToken={this.state.sessionToken} fetchMoreTasks={(token) => this.fetchTasks(token)} />
+            <Splash tasks={this.state.tasks} sessionToken={this.state.sessionToken} fetchMoreTasks={(token) => this.fetchTasks(token)} time={this.state.time} fetchMoreTime={(token) => this.fetchTime(token)}/>
           </Route>
         </Switch>
       )
