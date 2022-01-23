@@ -8,22 +8,44 @@ import {
   Switch
 } from 'react-router-dom';
 
-
-
 class App extends Component {
   constructor() {
     super();
+    this.fetchTasks(localStorage.getItem('token'));
     this.state = {
-      sessionToken: ''
+      sessionToken: localStorage.getItem('token'),
+      tasks:[]
     }
   }
 
-  componentWillMount() {
-    const token = localStorage.getItem('token');
-    if (token && !this.state.sessionToken) {
-      this.setState({ sessionToken: token });
-    }
-  }
+  fetchTasks = (sessionToken) => {
+    fetch("http://localhost:9000/tasks/", {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': sessionToken
+        })
+    }).then((res) => res.json())
+    .then((tasksData) => {
+        console.log(tasksData)
+        this.setState({ tasks: tasksData })
+        return tasksData
+    })
+}
+
+
+  // async componentDidMount() {
+  //   const response = await fetch('http://localhost:9000/tasks/', {
+  //     headers: new Headers({
+  //       'Content-Type': 'application/json',
+  //       'Authorization': localStorage.getItem('token')
+  //     })
+  //   });
+  //   const json = await response.json();
+  //   this.setState({ tasks: json })
+  //   console.log("json");
+  //   console.log(json);
+  // }
 
   setSessionState = (token) => {
     localStorage.setItem('token', token);
@@ -38,11 +60,11 @@ class App extends Component {
 }
 
   protectedViews = () => {
-    if (this.state.sessionToken === localStorage.getItem('token')) {
+    if (localStorage.getItem('token')) {
       return(
         <Switch>
           <Route path='/' exact>
-            <Splash sessionToken={this.state.sessionToken} />
+            <Splash tasks={this.state.tasks} sessionToken={this.state.sessionToken} fetchMoreTasks={(token) => this.fetchTasks(token)} />
           </Route>
         </Switch>
       )
@@ -50,7 +72,7 @@ class App extends Component {
       return (
         <Switch>
           <Route path='/' exact>
-            <Auth setToken={this.setSessionState} />
+            <Auth setToken={(token) => this.setSessionState(token)} />
           </Route>
         </Switch>
       )
@@ -65,6 +87,8 @@ class App extends Component {
           {this.protectedViews()}
         </div>
       </Router>
+
+      //! Move this inside the other render
     )
   };
 }

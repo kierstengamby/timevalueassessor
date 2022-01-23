@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+    import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Button, Container, Row } from 'reactstrap';
 
 class Login extends Component {
@@ -31,7 +31,7 @@ class Login extends Component {
         }).then(
             (res) => res.json()
         ).then((data) => {
-            this.props.setToken(data.sessionToken);
+            this.props.setLoginToken(data.sessionToken);
         }).catch(err => console.log(`${err}`));
         event.preventDefault();    
     }

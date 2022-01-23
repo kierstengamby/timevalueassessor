@@ -33,7 +33,7 @@ class TasksCreate extends Component {
             })
         }).then((res) => res.json())
         .then((taskData) => {
-            this.props.updateTasksArray(); 
+            this.props.updateTasksArray(this.props.token); 
             this.setState({
                 id: '',
                 cleaning: 0,
@@ -44,8 +44,7 @@ class TasksCreate extends Component {
                 carCare: 0,
                 taxes: 0
             });
-            console.log(taskData);
-        }); console.log(this.setState);
+        });
     }
 
     render() {

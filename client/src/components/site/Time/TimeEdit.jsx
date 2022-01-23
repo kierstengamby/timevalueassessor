@@ -6,8 +6,8 @@ class TimeEdit extends React.Component {
         super(props)
             this.state = {
                 id: '',
-                hourlyWage: '',
-                neutralValue: ''
+                hourlyWage: 0,
+                neutralValue: 0
             };
         }
 
