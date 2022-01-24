@@ -22,13 +22,6 @@ class Register extends Component {
         fetch('http://localhost:9000/auth/register', {
             method: 'POST',
             body: JSON.stringify({ user: this.state }),
-                    // {
-                    //     firstName: firstName,
-                    //     lastName: lastName,
-                    //     email: email,
-                    //     password: password
-                    // }
-                // }),
             headers: new Headers({
                 'Content-Type': 'application/json',
             })
@@ -42,9 +35,11 @@ class Register extends Component {
     
     render() {
         return (
-            <div>
+            <div className="base-register-container" ref={this.props.containerRef}>
                 <h1>Register</h1>
-                <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quia laudantium magnam facere saepe architecto incidunt. Voluptas, reiciendis, sed et tenetur delectus officia neque consequuntur quibusdam dignissimos incidunt, laudantium iure.</h6>
+                <br />
+                <h6>If you do not yet have an account, please register below.</h6>
+                <hr />
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="firstName">First Name</Label>

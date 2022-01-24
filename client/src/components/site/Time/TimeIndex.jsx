@@ -142,85 +142,174 @@ class TimeIndex extends Component {
     }
 
     render() {
-        // const timevalue = this.state.time.length >= 1 ? <TimeTable timevalue={this.state.time} delete={this.timeDelete} update={this.setUpdatedTime} /> : <h2>Log your time to see table</h2>
-        return (
-            <Container>
-                <Row>
-                    <Col md="3">
-                        <div>
-                            <h3>Log Time</h3>
-                            <hr />
-                            <Form onSubmit={this.handleSubmit} >
-                                <FormGroup>
-                                    <Label for="hourlyWage">Hourly Wage</Label>
-                                    <Input id="hourlyWage" type="text" name="newHourlyWage" value={this.state.newHourlyWage} placeholder="Enter hourly wage" onChange={this.handleChange} />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="neutralValue">Neutral Value</Label>
-                                    <Input id="neutralValue" type="text" name="newNeutralValue" value={this.state.newNeutralValue} placeholder="Enter your neutral hourly value" onChange={this.handleChange} />
-                                </FormGroup>
-                                <Button type="submit" color="primary"> Submit </Button>
-                            </Form>
-                        </div>
-                        {/* <TimeCreate token={this.props.token} updateTimeArray={this.fetchTime} /> */}
-                    </Col>
-                    <Col md="9">
-                        {/* {timevalue} */}
-                        <div>
-                            <h3>Time History</h3>
-                            <hr />
-                            <Table striped>
-                                <thead>
-                                    <tr>
-                                        {/* <th>#</th> */}
-                                        <th>Hourly Wage</th>
-                                        <th>Neutral Value</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        this.state.time.map((time, id) => {
-                                            return (
-                                                <tr key={id}>
-                                                    {/* <th scope="row">{time.id}</th> */}
-                                                    <td>{time.hourlyWage}</td>
-                                                    <td>{time.neutralValue}</td>
-                                                    <td>
-                                                        <Button id={time.id} onClick={this.timeDelete} color="danger">Delete</Button>
-                                                        <Button id={time.id} onClick={e => this.setUpdatedTime(e, time)} color="warning">Update</Button>
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </Table>
-                        </div>
-                    </Col>
-                    <Col md="12">
-                        {/* { this.state.updatePressed ? <TimeEdit t={this.state.updatePressed} update={this.timeUpdate} timevalue={this.state.timeToUpdate} /> : <div></div> } */}
-                        <div>
-                            <Modal isOpen={this.state.updatePressed} >
-                                <ModalHeader >Log Time</ModalHeader>
-                                <ModalBody>
-                                    <Form onSubmit={this.handleUpdateSubmit} >
+        let valueLogged = this.state.time.length;
+        console.log(valueLogged);
+
+        const showLogger = () => {
+            if (valueLogged !== 1) {
+                return (
+                    <Container>
+                        <Row>
+                            <Col md="3">
+                                <div>
+                                    <h3>Log Time</h3>
+                                    <hr />
+                                    <Form onSubmit={this.handleSubmit} >
                                         <FormGroup>
                                             <Label for="hourlyWage">Hourly Wage</Label>
-                                            <Input id="hourlyWage" type="text" name="updateHourlyWage" value={this.state.updateHourlyWage} placeholder="Enter hourly wage" onChange={this.handleUpdateChange} />
+                                            <Input id="hourlyWage" type="text" name="newHourlyWage" value={this.state.newHourlyWage} placeholder="Enter hourly wage" onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="neutralValue">Neutral Value</Label>
-                                            <Input id="neutralValue" type="text" name="updateNeutralValue" value={this.state.updateNeutralValue} placeholder="Enter your neutral hourly value" onChange={this.handleUpdateChange} />
+                                            <Input id="neutralValue" type="text" name="newNeutralValue" value={this.state.newNeutralValue} placeholder="Enter your neutral hourly value" onChange={this.handleChange} />
                                         </FormGroup>
                                         <Button type="submit" color="primary"> Submit </Button>
                                     </Form>
-                                </ModalBody>
-                            </Modal>
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
+                                </div>
+                            </Col>
+                            <Col md="9">
+                            </Col>
+                        </Row>
+                    </Container>
+                )
+            } else if (valueLogged === 1) {
+                return (
+                    <Container>
+                        <Row>
+                            
+                            <Col md="9">
+                                <div>
+                                    <h3>Time History</h3>
+                                    <hr />
+                                    <Table striped>
+                                        <thead>
+                                            <tr>
+                                                <th>Hourly Wage</th>
+                                                <th>Neutral Value</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                this.state.time.map((time, id) => {
+                                                    return (
+                                                        <tr key={id}>
+                                                            <td>{time.hourlyWage}</td>
+                                                            <td>{time.neutralValue}</td>
+                                                            <td>
+                                                                <Button id={time.id} onClick={this.timeDelete} color="danger">Delete</Button>
+                                                                <Button id={time.id} onClick={e => this.setUpdatedTime(e, time)} color="warning">Update</Button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </div>
+                            </Col>
+                            <Col md="12">
+                                <div>
+                                    <Modal isOpen={this.state.updatePressed} >
+                                        <ModalHeader >Log Time</ModalHeader>
+                                        <ModalBody>
+                                            <Form onSubmit={this.handleUpdateSubmit} >
+                                                <FormGroup>
+                                                    <Label for="hourlyWage">Hourly Wage</Label>
+                                                    <Input id="hourlyWage" type="text" name="updateHourlyWage" value={this.state.updateHourlyWage} placeholder="Enter hourly wage" onChange={this.handleUpdateChange} />
+                                                </FormGroup>
+                                                <FormGroup>
+                                                    <Label for="neutralValue">Neutral Value</Label>
+                                                    <Input id="neutralValue" type="text" name="updateNeutralValue" value={this.state.updateNeutralValue} placeholder="Enter your neutral hourly value" onChange={this.handleUpdateChange} />
+                                                </FormGroup>
+                                                <Button type="submit" color="primary"> Submit </Button>
+                                            </Form>
+                                        </ModalBody>
+                                    </Modal>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
+                )
+            }
+        }
+        
+        return (
+            <div>
+                {showLogger()}
+            </div>
+            // <Container>
+            //     <Row>
+            //         <Col md="3">
+            //             <div>
+            //                 <h3>Log Time</h3>
+            //                 <hr />
+            //                 <Form onSubmit={this.handleSubmit} >
+            //                     <FormGroup>
+            //                         <Label for="hourlyWage">Hourly Wage</Label>
+            //                         <Input id="hourlyWage" type="text" name="newHourlyWage" value={this.state.newHourlyWage} placeholder="Enter hourly wage" onChange={this.handleChange} />
+            //                     </FormGroup>
+            //                     <FormGroup>
+            //                         <Label for="neutralValue">Neutral Value</Label>
+            //                         <Input id="neutralValue" type="text" name="newNeutralValue" value={this.state.newNeutralValue} placeholder="Enter your neutral hourly value" onChange={this.handleChange} />
+            //                     </FormGroup>
+            //                     <Button type="submit" color="primary"> Submit </Button>
+            //                 </Form>
+            //             </div>
+            //         </Col>
+            //         <Col md="9">
+            //             <div>
+            //                 <h3>Time History</h3>
+            //                 <hr />
+            //                 <Table striped>
+            //                     <thead>
+            //                         <tr>
+            //                             <th>Hourly Wage</th>
+            //                             <th>Neutral Value</th>
+            //                             <th></th>
+            //                         </tr>
+            //                     </thead>
+            //                     <tbody>
+            //                         {
+            //                             this.state.time.map((time, id) => {
+            //                                 return (
+            //                                     <tr key={id}>
+            //                                         <td>{time.hourlyWage}</td>
+            //                                         <td>{time.neutralValue}</td>
+            //                                         <td>
+            //                                             <Button id={time.id} onClick={this.timeDelete} color="danger">Delete</Button>
+            //                                             <Button id={time.id} onClick={e => this.setUpdatedTime(e, time)} color="warning">Update</Button>
+            //                                         </td>
+            //                                     </tr>
+            //                                 )
+            //                             })
+            //                         }
+            //                     </tbody>
+            //                 </Table>
+            //             </div>
+            //         </Col>
+            //         <Col md="12">
+            //             <div>
+            //                 <Modal isOpen={this.state.updatePressed} >
+            //                     <ModalHeader >Log Time</ModalHeader>
+            //                     <ModalBody>
+            //                         <Form onSubmit={this.handleUpdateSubmit} >
+            //                             <FormGroup>
+            //                                 <Label for="hourlyWage">Hourly Wage</Label>
+            //                                 <Input id="hourlyWage" type="text" name="updateHourlyWage" value={this.state.updateHourlyWage} placeholder="Enter hourly wage" onChange={this.handleUpdateChange} />
+            //                             </FormGroup>
+            //                             <FormGroup>
+            //                                 <Label for="neutralValue">Neutral Value</Label>
+            //                                 <Input id="neutralValue" type="text" name="updateNeutralValue" value={this.state.updateNeutralValue} placeholder="Enter your neutral hourly value" onChange={this.handleUpdateChange} />
+            //                             </FormGroup>
+            //                             <Button type="submit" color="primary"> Submit </Button>
+            //                         </Form>
+            //                     </ModalBody>
+            //                 </Modal>
+            //             </div>
+            //         </Col>
+            //     </Row>
+            // </Container>
         )
     }
 }

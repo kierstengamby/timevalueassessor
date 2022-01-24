@@ -3,9 +3,9 @@
     padding: 2em;
     border: 1px solid #e5e5e5;
     border-radius: 0.4em;
-    box-shadow: 2px 4px 20px #f0f0f0;
+    box-shadow: 2px 4px 400px #f0f0f0;
 }
 
 .login-col {
-    border-left: 1px solid black;
+    border-left: 2px solid white;
 }

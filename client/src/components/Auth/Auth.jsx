@@ -2,76 +2,72 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import Register from "./Register";
 import Login from "./Login";
-import "./Auth.css"
+import "./auth.css"
 
-const Auth = (props) => {
-    return (
-        <Container className="auth-container">
-            <Row>
-                <Col md="6" className="register-col">
-                    <Register setToken={(token) => props.setToken(token)} />
-                </Col>
-                <Col md="6" className="login-col">
-                    <Login setLoginToken={(token) => props.setToken(token)} />
-                </Col>
-            </Row>
-        </Container>
-    )
+
+class Auth extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isLogged: true,
+        }
+    }
+
+    changeState() {
+        const { isLogged } = this.state;
+        if (isLogged) {
+            this.rightSide.classList.remove("right");
+            this.rightSide.classList.add("left");
+        } else {
+            this.rightSide.classList.remove("left");
+            this.rightSide.classList.add("right");
+        }
+
+        this.setState((prveState) => ({ isLogged: !prveState.isLogged }))
+    }
+
+    render() {
+        const { isLogged } = this.state;
+        const current = isLogged ? "Register" : "Login";
+        const currentActive = isLogged ? "login" : "register";
+        return (
+            <div className="Auth">
+                <div className="login">
+                    <div className="container">
+                        { isLogged && <Login containerRef={(ref) => this.current = ref} setLoginToken={(token) => this.props.setToken(token)} /> }
+                        { !isLogged && <Register containerRef={(ref) => this.current = ref} setToken={(token) => this.props.setToken(token)} />}
+                    </div>
+                    <RightSide current={current} containerRef={ref => this.rightSide = ref} onClick={this.changeState.bind(this)} />
+                </div>
+            </div>
+        )
+    }
+
 }
 
+const RightSide = props => {
+    return <div className="right-side" ref={props.containerRef} onClick={props.onClick}>
+        <div className="inner-container">
+            <div className="text">{props.current}</div>
+        </div>
+    </div>
+}
 
-// class Auth extends Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-//             toggle: false,
-//         }
-//     }
+// const Auth = (props) => {
 
-//     render() {
-//         return (
-//             <div className="center">
-//                 {
-//                 <Container className='auth-container'>
-//                     <Row mb-3>
-//                         {toggle ? <Login updateToken={props.updateToken} /> : <Signup updateToken={props.updateToken} />}
-//                         <Col>
-//                             <Button outline color="dark" className="button" onClick={handleToggle}>{loginOrRegister}</Button>
-//                         </Col>
-//                     </Row>
-    
-//                 </Container>
-//                 }
-//             </div>
-//         )
-//     }
-    
+//     return (
+//         <Container className="auth-container">
+//             <Row>
+//                 <Col md="6" className="register-col">
+//                     <Register setToken={(token) => props.setToken(token)} />
+//                 </Col>
+//                 <Col md="6" className="login-col">
+//                     <Login setLoginToken={(token) => props.setToken(token)} />
+//                 </Col>
+//             </Row>
+//         </Container>
+//     )
 // }
 
-// // const Auth = (props) => {
-// //     const [loading, setLoading] = useState(false);
-
-// //     useEffect(() => {
-// //         setLoading(true)
-// //         setTimeout(() => {
-// //             setLoading(false)
-// //         }, 1000)
-// //     }, [])
-
-
-// //     const [toggle, setToggle] = useState(true);
-// //     const [loginOrRegister, setLoginOrRegister] = useState("Go to Sign Up");
-
-// //     const handleToggle = () => {
-// //         if (toggle === true) {
-// //             setToggle(false);
-// //             setLoginOrRegister("Go to Login");
-// //         } else {
-// //             setToggle(true);
-// //             setLoginOrRegister("Go to Sign Up");
-// //         }
-// //     }
-
-// // }
 
 export default Auth;

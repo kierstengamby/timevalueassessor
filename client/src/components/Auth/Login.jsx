@@ -1,5 +1,6 @@
     import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Button, Container, Row } from 'reactstrap';
+import './login.css';
 
 class Login extends Component {
     constructor(props) {
@@ -20,11 +21,6 @@ class Login extends Component {
         fetch('http://localhost:9000/auth/login', {
             method: 'POST',
             body: JSON.stringify({ user: this.state }),
-                //     {
-                //         email: email,
-                //         password: password
-                //     }
-                // }),
             headers: new Headers({
                 'Content-Type': 'application/json',
             })
@@ -38,9 +34,11 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className="base-login-container" ref={this.props.containerRef}>
                 <h1>Login</h1>
-                <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi quia sit error blanditiis debitis eaque voluptatem et odit. Quae tempora fugiat quis est? Aliquam magni doloribus optio sed possimus tempora!</h6>
+                <br />
+                <h6>If you already have an account, please log in using your email and password below.</h6>
+                <hr />
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="email">Email</Label>
