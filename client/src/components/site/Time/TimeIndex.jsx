@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Table, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
-// import TasksIndex from '../Task/TasksIndex';
-// import TimeCreate from './TimeCreate';
-// import TimeEdit from './TimeEdit';
-// import TimeTable from './TimeTable';
+import './time.css';
 
 class TimeIndex extends Component {
     constructor(props) {
@@ -148,11 +145,11 @@ class TimeIndex extends Component {
         const showLogger = () => {
             if (valueLogged !== 1) {
                 return (
-                    <Container>
+                    <Container fluid>
                         <Row>
                             <Col md="3">
                                 <div>
-                                    <h3>Log Time</h3>
+                                    <h3>Log Values</h3>
                                     <hr />
                                     <Form onSubmit={this.handleSubmit} >
                                         <FormGroup>
@@ -167,19 +164,18 @@ class TimeIndex extends Component {
                                     </Form>
                                 </div>
                             </Col>
-                            <Col md="9">
-                            </Col>
                         </Row>
                     </Container>
                 )
             } else if (valueLogged === 1) {
                 return (
-                    <Container>
+                    <Container fluid>
                         <Row>
-                            
-                            <Col md="9">
+                            <Col md="3">
+                            </Col>
+                            <Col md="6">
                                 <div>
-                                    <h3>Time History</h3>
+                                    <h3>Your Values</h3>
                                     <hr />
                                     <Table striped>
                                         <thead>
@@ -211,7 +207,7 @@ class TimeIndex extends Component {
                             <Col md="12">
                                 <div>
                                     <Modal isOpen={this.state.updatePressed} >
-                                        <ModalHeader >Log Time</ModalHeader>
+                                        <ModalHeader >Log Values</ModalHeader>
                                         <ModalBody>
                                             <Form onSubmit={this.handleUpdateSubmit} >
                                                 <FormGroup>
@@ -233,7 +229,7 @@ class TimeIndex extends Component {
                 )
             }
         }
-        
+
         return (
             <div>
                 {showLogger()}

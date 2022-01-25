@@ -10,9 +10,13 @@ const Splash = (props) => {
     return (
         <div>
             <Homepage token={props.sessionToken} />
-            <Stopwatch token={props.sessionToken} />
+            <br /><br />
             <ValueCalcIndex token={props.sessionToken} tasks={props.tasks} time={props.time} />
+            <br /><br /><br />
             <TimeIndex token={props.sessionToken} time={props.time} />
+            <br /><br />
+            <Stopwatch token={props.sessionToken} />
+            <br /><br /><br />
             <TasksIndex token={props.sessionToken} tasks={props.tasks} />
         </div>
     )

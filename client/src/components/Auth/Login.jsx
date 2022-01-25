@@ -1,6 +1,5 @@
-    import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { Form, FormGroup, Label, Input, Button, Container, Row } from 'reactstrap';
-import './login.css';
 
 class Login extends Component {
     constructor(props) {
@@ -34,7 +33,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="base-login-container" ref={this.props.containerRef}>
+            <div className="base-container" ref={this.props.containerRef}>
                 <h1>Login</h1>
                 <br />
                 <h6>If you already have an account, please log in using your email and password below.</h6>
@@ -48,7 +47,7 @@ class Login extends Component {
                         <Label for="password">Password</Label>
                         <Input id="li_password" type="password" name="password" placeholder="Enter password" onChange={this.handleChange} />
                     </FormGroup>
-                    <Button type="submit">Submit</Button>
+                    <Button className="btn" type="submit">Submit</Button>
                 </Form>
             </div>
         )

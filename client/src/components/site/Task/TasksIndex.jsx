@@ -196,6 +196,8 @@ class TasksIndex extends Component {
                     <Col md="3">
                         <div>
                             <h3>Log Tasks</h3>
+                            <h6>Log each time in minutes (e.g. enter 90 for 1.5 hours)</h6>
+                            <h6>Round each number to the nearest whole number</h6>
                             <hr />
                             <Form onSubmit={this.handleSubmit} >
                                 <FormGroup>

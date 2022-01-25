@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import Register from "./Register";
 import Login from "./Login";
-import "./auth.css"
-
+import "./style.css"
 
 class Auth extends Component {
     constructor(props) {
@@ -11,6 +10,10 @@ class Auth extends Component {
         this.state = {
             isLogged: true,
         }
+    }
+
+    componentDidMount() {
+        this.rightSide.classList.add("right");
     }
 
     changeState() {
@@ -23,7 +26,7 @@ class Auth extends Component {
             this.rightSide.classList.add("right");
         }
 
-        this.setState((prveState) => ({ isLogged: !prveState.isLogged }))
+        this.setState((prevState) => ({ isLogged: !prevState.isLogged }))
     }
 
     render() {
@@ -31,27 +34,32 @@ class Auth extends Component {
         const current = isLogged ? "Register" : "Login";
         const currentActive = isLogged ? "login" : "register";
         return (
-            <div className="Auth">
-                <div className="login">
-                    <div className="container">
-                        { isLogged && <Login containerRef={(ref) => this.current = ref} setLoginToken={(token) => this.props.setToken(token)} /> }
-                        { !isLogged && <Register containerRef={(ref) => this.current = ref} setToken={(token) => this.props.setToken(token)} />}
+            <Container>
+                <div className="Auth">
+                    <div className="login">
+                        <div className="container" ref={ref => (this.container = ref)}>
+                            {isLogged && <Login containerRef={(ref) => this.current = ref} setLoginToken={(token) => this.props.setToken(token)} />}
+                            {!isLogged && <Register containerRef={(ref) => this.current = ref} setToken={(token) => this.props.setToken(token)} />}
+                        </div>
+                        <RightSide current={current} currentActive={currentActive} containerRef={ref => this.rightSide = ref} onClick={this.changeState.bind(this)} />
                     </div>
-                    <RightSide current={current} containerRef={ref => this.rightSide = ref} onClick={this.changeState.bind(this)} />
                 </div>
-            </div>
+            </Container>
         )
     }
 
 }
 
-const RightSide = props => {
-    return <div className="right-side" ref={props.containerRef} onClick={props.onClick}>
-        <div className="inner-container">
-            <div className="text">{props.current}</div>
+const RightSide = (props) => {
+    return (
+        <div className="right-side" ref={props.containerRef} onClick={props.onClick}>
+            <div className="inner-container">
+                <div className="text">{props.current}</div>
+            </div>
         </div>
-    </div>
+    )
 }
+
 
 // const Auth = (props) => {
 

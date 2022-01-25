@@ -35,7 +35,7 @@ class Register extends Component {
     
     render() {
         return (
-            <div className="base-register-container" ref={this.props.containerRef}>
+            <div className="base-container" ref={this.props.containerRef}>
                 <h1>Register</h1>
                 <br />
                 <h6>If you do not yet have an account, please register below.</h6>

@@ -1,0 +1,22 @@
+.mainDiv {
+    text-align: center;
+}
+
+.mainDiv a {
+    color: white;
+}
+
+.mainDiv a:hover {
+    color: pink;
+    /* background-color: white; */
+    text-decoration: none;
+}
+
+.mainDiv h1 {
+    color: black;
+    font: bolder
+}
+
+/* .mainDiv h5 {
+    color: pink
+} */
