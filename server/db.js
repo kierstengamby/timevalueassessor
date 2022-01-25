@@ -7,10 +7,10 @@
 
 new Sequelize(
     process.env.DATABASE_URL  || 
-    `postgresql://postgres:${encodeURIComponent(process.env.PASS)}@localhost/timevalueassessor`,
+    `postgresql://postgres:${encodeURIComponent(process.env.PASS)}@localhost:5432/timevalueassessor`,
     {
         dialect: 'postgres',
     }
 )
 
-// module.exports = seqeulize;
+module.exports = seqeulize;
