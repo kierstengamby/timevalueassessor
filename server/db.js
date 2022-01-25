@@ -6,7 +6,7 @@ const { Sequelize } = require('sequelize');
 // })
 
 const seqeulize = new Sequelize (
-    // process.env.DATABASE_URL  || 
+    process.env.DATABASE_URL  || 
     `postgresql://postgres:${encodeURIComponent(process.env.PASS)}@localhost:5432/timevalueassessor`,
     {
         dialect: 'postgres',
