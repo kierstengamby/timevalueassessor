@@ -195,6 +195,7 @@ class TasksIndex extends Component {
                 <Row>
                     <Col md="3">
                         <div>
+                        <hr />
                             <h3>Log Tasks</h3>
                             <h6>Log each time in minutes (e.g. enter 90 for 1.5 hours)</h6>
                             <h6>Round each number to the nearest whole number</h6>
@@ -234,6 +235,7 @@ class TasksIndex extends Component {
                     </Col>
                     <Col md="9">
                         <div>
+                        <hr />
                             <h3>Tasks History</h3>
                             <hr />
                             <Table striped>
@@ -267,7 +269,7 @@ class TasksIndex extends Component {
                                                     <td>{task.taxes}</td>
                                                     <td>
                                                         <Button id={task.id} onClick={e => this.setUpdatedTask(e, task)} color="outline-light">Update</Button>
-                                                        <Button id={task.id} onClick={this.tasksDelete} color="outline-danger">Delete</Button>
+                                                        <Button id={task.id} onClick={this.tasksDelete} color="outline-secondary">Delete</Button>
                                                     </td>
                                                 </tr>
                                             )
