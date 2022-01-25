@@ -9,6 +9,7 @@ const Homepage = () => {
             <div className='mainDiv'>
                 <h1>Welcome to Your Time Value Calculator!</h1>
                 <br />
+                <br />
                 <h5>To begin, please take the following quiz to determine the value of a neutral hour of your time: <a href="https://programs.clearerthinking.org/what_is_your_time_really_worth_to_you.html" target="_blank">Value of Free Time Calculator</a>.</h5>
                 <h6>Please note: you do not need to enter your email address to view results.</h6>
                 <br />

@@ -148,8 +148,11 @@ class TimeIndex extends Component {
                     <Container fluid>
                         <Row>
                             <Col md="3">
+                                </Col>
+                                <Col md="6">
                                 <div>
                                     <h3>Log Values</h3>
+                                    <h6>Round each number to the nearest whole number</h6>
                                     <hr />
                                     <Form onSubmit={this.handleSubmit} >
                                         <FormGroup>
@@ -160,7 +163,7 @@ class TimeIndex extends Component {
                                             <Label for="neutralValue">Neutral Value</Label>
                                             <Input id="neutralValue" type="text" name="newNeutralValue" value={this.state.newNeutralValue} placeholder="Enter your neutral hourly value" onChange={this.handleChange} />
                                         </FormGroup>
-                                        <Button type="submit" color="primary"> Submit </Button>
+                                        <Button type="submit" color="secondary"> Submit </Button>
                                     </Form>
                                 </div>
                             </Col>
@@ -193,8 +196,8 @@ class TimeIndex extends Component {
                                                             <td>{time.hourlyWage}</td>
                                                             <td>{time.neutralValue}</td>
                                                             <td>
-                                                                <Button id={time.id} onClick={this.timeDelete} color="danger">Delete</Button>
-                                                                <Button id={time.id} onClick={e => this.setUpdatedTime(e, time)} color="warning">Update</Button>
+                                                                <Button id={time.id} onClick={e => this.setUpdatedTime(e, time)} color="outline-light">Update</Button>
+                                                                <Button id={time.id} onClick={this.timeDelete} color="outline-danger">Delete</Button>
                                                             </td>
                                                         </tr>
                                                     )
@@ -206,9 +209,10 @@ class TimeIndex extends Component {
                             </Col>
                             <Col md="12">
                                 <div>
-                                    <Modal isOpen={this.state.updatePressed} >
+                                    <Modal isOpen={this.state.updatePressed} size="lg" centered>
                                         <ModalHeader >Log Values</ModalHeader>
                                         <ModalBody>
+                                        <h6>Round each number to the nearest whole number</h6>
                                             <Form onSubmit={this.handleUpdateSubmit} >
                                                 <FormGroup>
                                                     <Label for="hourlyWage">Hourly Wage</Label>
@@ -218,7 +222,7 @@ class TimeIndex extends Component {
                                                     <Label for="neutralValue">Neutral Value</Label>
                                                     <Input id="neutralValue" type="text" name="updateNeutralValue" value={this.state.updateNeutralValue} placeholder="Enter your neutral hourly value" onChange={this.handleUpdateChange} />
                                                 </FormGroup>
-                                                <Button type="submit" color="primary"> Submit </Button>
+                                                <Button type="submit" color="secondary"> Submit </Button>
                                             </Form>
                                         </ModalBody>
                                     </Modal>

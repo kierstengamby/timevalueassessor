@@ -14,7 +14,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      sessionToken: localStorage.getItem('token'),
+      sessionToken: '',
       tasks: [],
       time: []
     }
@@ -54,7 +54,7 @@ class App extends Component {
             <Col>
               <Switch>
                 <Route path='/' exact>
-                  <Auth setToken={(token) => this.setSessionState(token)} />
+                  <Auth setToken={(token) => this.setSessionState(token)} setLoginToken={(token) => this.setSessionState(token)}/>
                 </Route>
               </Switch>
             </Col>

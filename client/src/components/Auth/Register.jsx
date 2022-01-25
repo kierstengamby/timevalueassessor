@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input, Button, Col, Container, Row } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, Col, Container, Row, FormFeedback } from 'reactstrap';
 
 class Register extends Component {
     constructor(props) {
@@ -28,11 +28,17 @@ class Register extends Component {
         }).then(
             (res) => res.json()
         ).then((data) => {
-            this.props.setToken(data.sessionToken);
+            if (data.sessionToken !== undefined) 
+            {
+                this.props.setToken(data.sessionToken)
+            } 
+            else {
+                alert(`${data.message}`)
+            }
         }).catch(err => console.log(`${err}`));
         event.preventDefault();
     }
-    
+
     render() {
         return (
             <div className="base-container" ref={this.props.containerRef}>
@@ -50,14 +56,14 @@ class Register extends Component {
                         <Input id="r_lastName" type="text" name="lastName" placeholder="Enter last name" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                    <Label for="email">Email</Label>
+                        <Label for="email">Email</Label>
                         <Input id="r_email" type="text" name="email" placeholder="Enter email" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label for="password">Password</Label>
                         <Input id="r_password" type="password" name="password" placeholder="Enter password" onChange={this.handleChange} />
                     </FormGroup>
-                    <Button type="submit">Submit</Button>
+                    <Button className="btn" type="submit">Submit</Button>
                 </Form>
             </div>
         )

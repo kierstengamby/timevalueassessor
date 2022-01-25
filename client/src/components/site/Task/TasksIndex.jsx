@@ -51,7 +51,7 @@ class TasksIndex extends Component {
     async componentDidMount() {
         // this.props.fetchMoreTasks(this.props.token)
         const response = await fetch('http://localhost:9000/tasks/', {
-            method:'GET',
+            method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
@@ -152,7 +152,7 @@ class TasksIndex extends Component {
             // putting the updated task back
             tempTasks.push({ cleaning: this.state.updateCleaning, laundry: this.state.updateLaundry, mealPrep: this.state.updateMealPrep, petCare: this.state.updatePetCare, shopping: this.state.updateShopping, carCare: this.state.updateCarCare, taxes: this.state.updateTaxes })
             // setting the tasks that now include the updated task
-            this.setState({tasks: tempTasks})
+            this.setState({ tasks: tempTasks })
             // remove the last task values and then add the new values
             this.setState({ totalCleaning: this.state.totalCleaning - parseInt(this.state.tasksToUpdate.cleaning) + parseInt(this.state.updateCleaning) })
             this.setState({ totalLaundry: this.state.totalLaundry - parseInt(this.state.tasksToUpdate.laundry) + parseInt(this.state.updateLaundry) })
@@ -228,7 +228,7 @@ class TasksIndex extends Component {
                                     <Label for="taxes">Taxes</Label>
                                     <Input id="taxes" type="text" name="newTaxes" value={this.state.newTaxes} placeholder="Average taxes time" onChange={this.handleChange} />
                                 </FormGroup>
-                                <Button type="submit" color="primary"> Submit </Button>
+                                <Button type="submit" color="secondary"> Submit </Button>
                             </Form>
                         </div>
                     </Col>
@@ -266,8 +266,8 @@ class TasksIndex extends Component {
                                                     <td>{task.carCare}</td>
                                                     <td>{task.taxes}</td>
                                                     <td>
-                                                        <Button id={task.id} onClick={this.tasksDelete} color="danger">Delete</Button>
-                                                        <Button id={task.id} onClick={e => this.setUpdatedTask(e, task)} color="warning">Update</Button>
+                                                        <Button id={task.id} onClick={e => this.setUpdatedTask(e, task)} color="outline-light">Update</Button>
+                                                        <Button id={task.id} onClick={this.tasksDelete} color="outline-danger">Delete</Button>
                                                     </td>
                                                 </tr>
                                             )
@@ -284,6 +284,7 @@ class TasksIndex extends Component {
                                         <td>{this.state.totalShopping}</td>
                                         <td>{this.state.totalCarCare}</td>
                                         <td>{this.state.totalTaxes}</td>
+                                        <td></td>
                                     </tr>
                                 </tfoot>
                             </Table>
@@ -292,9 +293,11 @@ class TasksIndex extends Component {
                     <Col md="12">
                         {/* {this.state.updatePressed ? <TasksEdit t={this.state.updatePressed} update={this.tasksUpdate} tasks={this.state.tasksToUpdate} updateStateFlag={this.state.updateFlag} /> : <div></div>} */}
                         <div>
-                            <Modal isOpen={this.state.updatePressed} >
+                            <Modal isOpen={this.state.updatePressed} size="lg" centered>
                                 <ModalHeader >Log Tasks</ModalHeader>
                                 <ModalBody>
+                                    <h6>Log each time in minutes (e.g. enter 90 for 1.5 hours)</h6>
+                                    <h6>Round each number to the nearest whole number</h6>
                                     <Form onSubmit={this.handleUpdateSubmit} >
                                         <FormGroup>
                                             <Label for="cleaning">Cleaning</Label>
@@ -324,7 +327,7 @@ class TasksIndex extends Component {
                                             <Label for="taxes">Taxes</Label>
                                             <Input id="taxes" type="text" name="updateTaxes" value={this.state.updateTaxes} onChange={this.handleUpdateChange} />
                                         </FormGroup>
-                                        <Button type="submit" color="primary"> Submit </Button>
+                                        <Button type="submit" color="secondary"> Submit </Button>
                                     </Form>
                                 </ModalBody>
                             </Modal>

@@ -3,20 +3,21 @@
 }
 
 .mainDiv a {
-    color: white;
+    color: #3d405b;
 }
 
 .mainDiv a:hover {
-    color: pink;
-    /* background-color: white; */
+    /* color: #E07A5F; */
+    color: #FAF9F0;
+    background-color: #E07A5F;
     text-decoration: none;
 }
 
 .mainDiv h1 {
-    color: black;
+    /* color: #3d405b; */
     font: bolder
 }
 
-/* .mainDiv h5 {
-    color: pink
-} */
+.mainDiv h5, h6 {
+    color: #3d405b
+}

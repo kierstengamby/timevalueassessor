@@ -21,14 +21,18 @@ class Login extends Component {
             method: 'POST',
             body: JSON.stringify({ user: this.state }),
             headers: new Headers({
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             })
         }).then(
             (res) => res.json()
         ).then((data) => {
-            this.props.setLoginToken(data.sessionToken);
+            if (data.sessionToken !== undefined) {
+                this.props.setLoginToken(data.sessionToken)
+            } else {
+                alert(`${data.message}`)
+            }
         }).catch(err => console.log(`${err}`));
-        event.preventDefault();    
+        event.preventDefault();
     }
 
     render() {

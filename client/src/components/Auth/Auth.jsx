@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import Register from "./Register";
 import Login from "./Login";
-import "./style.css"
+import "./authstyle.css"
 
 class Auth extends Component {
     constructor(props) {
@@ -38,8 +38,8 @@ class Auth extends Component {
                 <div className="Auth">
                     <div className="login">
                         <div className="container" ref={ref => (this.container = ref)}>
-                            {isLogged && <Login containerRef={(ref) => this.current = ref} setLoginToken={(token) => this.props.setToken(token)} />}
-                            {!isLogged && <Register containerRef={(ref) => this.current = ref} setToken={(token) => this.props.setToken(token)} />}
+                            {isLogged && <Login setLoginToken={(token) => this.props.setLoginToken(token)} containerRef={(ref) => this.current = ref}  />}
+                            {!isLogged && <Register setToken={(token) => this.props.setToken(token)} containerRef={(ref) => this.current = ref}  />}
                         </div>
                         <RightSide current={current} currentActive={currentActive} containerRef={ref => this.rightSide = ref} onClick={this.changeState.bind(this)} />
                     </div>

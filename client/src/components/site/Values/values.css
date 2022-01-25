@@ -1,0 +1,8 @@
+.main-container {
+    background-color: #3d405b;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+}
+
+#calc {
+    border: solid black 1.5px;
+}
