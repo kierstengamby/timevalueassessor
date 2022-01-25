@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import NavBar from './home/Navbar';
 import Auth from './components/Auth/Auth';
 import Splash from './home/Splash';
-import { 
-  BrowserRouter as Router, 
-  Route, 
-  Switch
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
 } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
 import "./app.css";
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
     super();
     this.state = {
       sessionToken: localStorage.getItem('token'),
-      tasks:[],
+      tasks: [],
       time: []
     }
   }
@@ -26,39 +27,57 @@ class App extends Component {
 
   logout = () => {
     this.setState({
-        sessionToken: '',
+      sessionToken: '',
     });
     localStorage.clear();
-}
+  }
 
   protectedViews = () => {
     if (localStorage.getItem('token')) {
-      return(
-        <Switch>
-          <Route path='/' exact>
-            <Splash tasks={this.state.tasks} sessionToken={this.state.sessionToken} time={this.state.time} />
-          </Route>
-        </Switch>
+      return (
+        <Container fluid>
+          <Row>
+            <Col>
+              <Switch>
+                <Route path='/' exact>
+                  <Splash tasks={this.state.tasks} sessionToken={this.state.sessionToken} time={this.state.time} />
+                </Route>
+              </Switch>
+            </Col>
+          </Row>
+        </Container>
       )
     } else {
       return (
-        <Switch>
-          <Route path='/' exact>
-            <Auth setToken={(token) => this.setSessionState(token)} />
-          </Route>
-        </Switch>
+        <Container fluid>
+          <Row>
+            <Col>
+              <Switch>
+                <Route path='/' exact>
+                  <Auth setToken={(token) => this.setSessionState(token)} />
+                </Route>
+              </Switch>
+            </Col>
+          </Row>
+        </Container>
       )
     }
   }
 
-  render () {
+  render() {
     return (
-      <Router>
-        <div>
-          <NavBar clickLogout={this.logout}/>
-          {this.protectedViews()}
-        </div>
-      </Router>
+      <Container fluid>
+        <Row>
+          <Col>
+            <Router>
+              <div>
+                <NavBar clickLogout={this.logout} />
+                {this.protectedViews()}
+              </div>
+            </Router>
+          </Col>
+        </Row>
+      </Container>
     )
   };
 }

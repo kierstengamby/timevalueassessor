@@ -1,9 +1,14 @@
-.nav{
-    display: flex;
-    flex-wrap: wrap;
-    background-color: white;
+#header-title{
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    padding: 2%;
+    margin: 10px;
+    background-color: grey;
+    opacity: 70%;
 }
 
-#title-page{
+#title-page-subtitle{
+    padding: 2%;
     text-align: center;
 }
