@@ -10,31 +10,24 @@ const Tasks = db.define("tasks", {
     },
     cleaning: {
         type: DataTypes.INTEGER
-        // allowNull: true,
     },
     laundry:{
         type: DataTypes.INTEGER
-        // allowNull: true,
     },
     mealPrep:{
         type: DataTypes.INTEGER
-        // allowNull: true,
     },
     petCare:{
         type: DataTypes.INTEGER
-        // allowNull: true,
     },
     shopping:{
         type: DataTypes.INTEGER
-        // allowNull: true,
     }, 
     carCare:{
         type: DataTypes.INTEGER
-        // allowNull: true,
     },
     taxes:{
         type: DataTypes.INTEGER
-        // allowNull: true,
     },
 });
 

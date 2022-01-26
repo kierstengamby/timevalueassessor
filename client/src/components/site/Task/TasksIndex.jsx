@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-// import TasksCreate from './TasksCreate';
-// import TasksEdit from './TasksEdit';
-// import TasksTable from './TasksTable';
 import { Container, Row, Col, Table, Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import APIURL from '../../../helpers/environment';
 
 class TasksIndex extends Component {
     constructor(props) {
@@ -49,8 +47,7 @@ class TasksIndex extends Component {
     }
 
     async componentDidMount() {
-        // this.props.fetchMoreTasks(this.props.token)
-        const response = await fetch('http://localhost:9000/tasks/', {
+        const response = await fetch(`${APIURL}/tasks/`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -61,7 +58,6 @@ class TasksIndex extends Component {
         this.setState({ tasks: json })
         const array = json
 
-        // console.log(json[0].cleaning)
         array.map((task, id) => {
             this.setState({ totalCleaning: this.state.totalCleaning += task.cleaning })
             this.state.totalLaundry += task.laundry
@@ -76,17 +72,17 @@ class TasksIndex extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        fetch(`http://localhost:9000/tasks/task`, {
+        fetch(`${APIURL}/tasks/task`, {
             method: 'POST',
             body: JSON.stringify({ task: { cleaning: this.state.newCleaning, laundry: this.state.newLaundry, mealPrep: this.state.newMealPrep, petCare: this.state.newPetCare, shopping: this.state.newShopping, carCare: this.state.newCarCare, taxes: this.state.newTaxes } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': this.props.token
+                'Authorization': localStorage.getItem('token')
             })
         }).then((res) => res.json())
             .then((taskData) => {
                 let tempTasks = this.state.tasks
-                tempTasks.push({ cleaning: this.state.newCleaning, laundry: this.state.newLaundry, mealPrep: this.state.newMealPrep, petCare: this.state.newPetCare, shopping: this.state.newShopping, carCare: this.state.newCarCare, taxes: this.state.newTaxes })
+                tempTasks.push({ id: taskData.task.id, cleaning: this.state.newCleaning, laundry: this.state.newLaundry, mealPrep: this.state.newMealPrep, petCare: this.state.newPetCare, shopping: this.state.newShopping, carCare: this.state.newCarCare, taxes: this.state.newTaxes })
                 this.setState({ tasks: tempTasks })
                 this.setState({ totalCleaning: this.state.totalCleaning + parseInt(this.state.newCleaning) })
                 this.setState({ totalLaundry: this.state.totalLaundry + parseInt(this.state.newLaundry) })
@@ -108,12 +104,12 @@ class TasksIndex extends Component {
     }
 
     tasksDelete = (event) => {
-        fetch(`http://localhost:9000/tasks/${event.target.id}`, {
+        fetch(`${APIURL}/tasks/${event.target.id}`, {
             method: 'DELETE',
             body: JSON.stringify({ task: { id: event.target.id } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': this.props.token
+                'Authorization': localStorage.getItem('token')
             })
         }).then((res) => {
             let tempTasks = this.state.tasks.filter(function (tasks) {
@@ -134,23 +130,22 @@ class TasksIndex extends Component {
     }
 
     tasksUpdate = (event, taskId) => {
-        fetch(`http://localhost:9000/tasks/${taskId}`, {
+        fetch(`${APIURL}/tasks/${taskId}`, {
             method: 'PUT',
             body: JSON.stringify({ task: { cleaning: this.state.updateCleaning, laundry: this.state.updateLaundry, mealPrep: this.state.updateMealPrep, petCare: this.state.updatePetCare, shopping: this.state.updateShopping, carCare: this.state.updateCarCare, taxes: this.state.updateTaxes } }),
-            // tasks: { cleaning, laundry, mealPrep, petCare, shopping, carCare, taxes } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': this.props.token
+                'Authorization': localStorage.getItem('token')
             })
         }).then((res) => {
             const self = this
             self.setState({ updatePressed: false })
-            // removing the task that we updated
+            // removing the task that was updated
             let tempTasks = this.state.tasks.filter(function (tasks) {
                 return tasks.id !== self.state.tasksToUpdate.id
             })
             // putting the updated task back
-            tempTasks.push({ cleaning: this.state.updateCleaning, laundry: this.state.updateLaundry, mealPrep: this.state.updateMealPrep, petCare: this.state.updatePetCare, shopping: this.state.updateShopping, carCare: this.state.updateCarCare, taxes: this.state.updateTaxes })
+            tempTasks.push({ id: taskId, cleaning: this.state.updateCleaning, laundry: this.state.updateLaundry, mealPrep: this.state.updateMealPrep, petCare: this.state.updatePetCare, shopping: this.state.updateShopping, carCare: this.state.updateCarCare, taxes: this.state.updateTaxes })
             // setting the tasks that now include the updated task
             this.setState({ tasks: tempTasks })
             // remove the last task values and then add the new values
@@ -241,7 +236,6 @@ class TasksIndex extends Component {
                             <Table striped>
                                 <thead>
                                     <tr>
-                                        {/* <th>#</th> */}
                                         <th></th>
                                         <th>Cleaning</th>
                                         <th>Laundry</th>
@@ -258,7 +252,6 @@ class TasksIndex extends Component {
                                         this.state.tasks.map((task, id) => {
                                             return (
                                                 <tr key={id}>
-                                                    {/* <th scope="row">{task.id}</th> */}
                                                     <th></th>
                                                     <td>{task.cleaning}</td>
                                                     <td>{task.laundry}</td>
@@ -293,7 +286,6 @@ class TasksIndex extends Component {
                         </div>
                     </Col>
                     <Col md="12">
-                        {/* {this.state.updatePressed ? <TasksEdit t={this.state.updatePressed} update={this.tasksUpdate} tasks={this.state.tasksToUpdate} updateStateFlag={this.state.updateFlag} /> : <div></div>} */}
                         <div>
                             <Modal isOpen={this.state.updatePressed} size="lg" centered>
                                 <ModalHeader >Log Tasks</ModalHeader>

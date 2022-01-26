@@ -9,8 +9,7 @@ import {
     Button,
     Container,
     Col,
-    Row,
-    NavbarText
+    Row
 } from 'reactstrap';
 import './navbar.css';
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Table, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import './values.css'
+import APIURL from '../../../helpers/environment';
 
 class ValueCalcIndex extends Component {
     constructor(props) {
@@ -36,14 +37,8 @@ class ValueCalcIndex extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     Promise.all([
-    //         fetch('http://localhost:9000/tasks/').then
-    //     ])
-    // }
-
     async componentDidMount() {
-        const response = await fetch('http://localhost:9000/tasks/', {
+        const response = await fetch(`${APIURL}/tasks/`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -66,7 +61,7 @@ class ValueCalcIndex extends Component {
     }
 
     async componentWillMount() {
-        const response = await fetch('http://localhost:9000/timevalue/', {
+        const response = await fetch(`${APIURL}/timevalue/`, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -104,7 +99,7 @@ class ValueCalcIndex extends Component {
 
     render() {
         return (
-            <Container >
+            <Container id="values-container">
                 <Row className="main-container" id="calc">
                     <Col className="main-container">
                         <div className="main-container">

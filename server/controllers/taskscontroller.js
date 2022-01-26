@@ -70,11 +70,6 @@ router.put('/:id', validateJWT, async(req, res) => {
 });
 
 router.get('/', validateJWT, async(req, res) => {
-    // if (req.user === undefined) {
-    //     return res.status(500).json({
-    //         error: "Err"
-    //     })
-    // }
     const userId = req.user?.id;
     const isAdmin = req.user?.isAdmin;
 

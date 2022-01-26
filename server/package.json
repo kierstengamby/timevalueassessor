@@ -10,9 +10,7 @@
   },
   "author": "Kiersten Gamby",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "1^19.4"
-  },
+  
   "dependencies": {
     "accesscontrol": "^2.2.1",
     "bcryptjs": "^2.4.3",

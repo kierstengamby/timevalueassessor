@@ -1,0 +1,10 @@
+.rows {
+    margin: 3%;
+}
+
+#span {
+    text-align: center;
+    font: bolder;
+    text-shadow: -1px 1px #E07A5F;
+    margin-bottom: 1%;
+}

@@ -110,7 +110,6 @@ router.get('/allinfo', validateJWT, async (req, res) => {
                     {
                         model: models.TimeValueModel,
                         model: models.TasksModel
-                        // model: models.ValuesModel
                     }
                 ]
             })

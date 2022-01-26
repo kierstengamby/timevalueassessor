@@ -9,10 +9,6 @@ UsersModel.hasMany(TimeValueModel);
 UsersModel.hasMany(TasksModel);
 UsersModel.hasMany(ValuesModel);
 
-// ValuesModel.belongsTo(UsersModel);
-// ValuesModel.belongsTo(TimeValueModel);
-// ValuesModel.belongsTo(TasksModel);
-
 module.exports = {
     dbConnection: db,
     models: {
