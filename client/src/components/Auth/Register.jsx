@@ -53,7 +53,7 @@ class Register extends Component {
                         <Input id="r_firstName" type="text" name="firstName" placeholder="Enter first name" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="lastName">First Name</Label>
+                        <Label for="lastName">Last Name</Label>
                         <Input id="r_lastName" type="text" name="lastName" placeholder="Enter last name" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
