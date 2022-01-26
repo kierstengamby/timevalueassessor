@@ -14,7 +14,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      sessionToken: '',
+      sessionToken: localStorage.getItem('token'),
       tasks: [],
       time: []
     }

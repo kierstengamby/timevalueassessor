@@ -51,7 +51,7 @@ class TasksIndex extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         });
         const json = await response.json();
@@ -77,7 +77,7 @@ class TasksIndex extends Component {
             body: JSON.stringify({ task: { cleaning: this.state.newCleaning, laundry: this.state.newLaundry, mealPrep: this.state.newMealPrep, petCare: this.state.newPetCare, shopping: this.state.newShopping, carCare: this.state.newCarCare, taxes: this.state.newTaxes } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         }).then((res) => res.json())
             .then((taskData) => {
@@ -109,7 +109,7 @@ class TasksIndex extends Component {
             body: JSON.stringify({ task: { id: event.target.id } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         }).then((res) => {
             let tempTasks = this.state.tasks.filter(function (tasks) {
@@ -135,7 +135,7 @@ class TasksIndex extends Component {
             body: JSON.stringify({ task: { cleaning: this.state.updateCleaning, laundry: this.state.updateLaundry, mealPrep: this.state.updateMealPrep, petCare: this.state.updatePetCare, shopping: this.state.updateShopping, carCare: this.state.updateCarCare, taxes: this.state.updateTaxes } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         }).then((res) => {
             const self = this

@@ -42,7 +42,7 @@ class ValueCalcIndex extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         });
         const json = await response.json();
@@ -65,7 +65,7 @@ class ValueCalcIndex extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         });
         const jsonRes = await response.json();

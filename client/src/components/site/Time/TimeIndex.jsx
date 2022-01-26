@@ -32,7 +32,7 @@ class TimeIndex extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         });
         const json = await response.json();
@@ -46,7 +46,7 @@ class TimeIndex extends Component {
             body: JSON.stringify({ time: { hourlyWage: this.state.newHourlyWage, neutralValue: this.state.newNeutralValue } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         }).then((res) => res.json())
             .then((timeData) => {
@@ -68,7 +68,7 @@ class TimeIndex extends Component {
             body: JSON.stringify({ timevalue: { id: event.target.id } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         })
             .then((res) => {
@@ -95,7 +95,7 @@ class TimeIndex extends Component {
             body: JSON.stringify({ time: { hourlyWage: parseInt(this.state.updateHourlyWage), neutralValue: this.state.updateNeutralValue } }),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': this.props.token
             })
         }).then((res) => {
             const self = this
