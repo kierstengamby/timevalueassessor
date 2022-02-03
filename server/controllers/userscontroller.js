@@ -12,7 +12,7 @@ router.post('/register', async (req, res) => {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            password: bcrypt.hashSync(password, 10),
+            password: bcrypt.hashSync(password, 20),
             isAdmin: isAdmin
         })
         .then(

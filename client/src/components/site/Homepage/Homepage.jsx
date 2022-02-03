@@ -16,7 +16,7 @@ const Homepage = () => {
                     <h5>When you have found the value of one hour of your free time, enter it in the Values Form along with your hourly wage. You can revisit this at any time if you feel the value of your free time has changed and update the values.</h5>
                     <h5>As you complete tasks throughout the span of a week, log the time in minutes using the Tasks Form. You can log multiple tasks at once, or do a separate log each time you complete a task.</h5>
                     <h5>A stopwatch is provided for your convenience as well.</h5> 
-                    <h5>At the end of the week, select the Get Totals button under the Value Calculator to determine your average cost per hour for each task.</h5> 
+                    <h5>At the end of the week, select the Get Totals button under the Value Calculator to determine your average cost per hour for each task. Note: refresh the page prior to selecting the Get Totals button to ensure accurate calculations.</h5> 
                     <h5> Use this information to help you determine if, in relation to the value of a neutral hour of your time, it would be better to outsource a task or continue completing it yourself.</h5>
                     </Row>
                 </div>
